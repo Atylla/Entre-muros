@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101b22" />
+  <meta name="description" content="Entre Muros: um jogo narrativo em primeira pessoa sobre memória, racismo, identidade e desigualdade social, em diálogo com Quarto de Despejo." />
+  <title>ENTRE MUROS — Histórias que a cidade não conta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="viewport.css" />
+  <script src="data.js" defer></script>
+  <script src="art.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="viewport.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <section id="home-screen" class="home-screen" aria-labelledby="home-title">
+      <div class="home-noise" aria-hidden="true"></div>
+      <header class="home-header">
+        <div class="identity"><span class="identity-mark">EM<span class="identity-dot">.</span></span><span class="identity-note">UMA EXPERIÊNCIA INTERATIVA</span></div>
+        <button type="button" id="home-credits" class="bare-button home-link">SOBRE O PROJETO <span aria-hidden="true">↗</span></button>
+      </header>
+      <main class="home-main">
+        <div class="home-copy">
+          <p class="eyebrow"><span class="line-mark"></span> UM JOGO SOBRE O QUE ESCOLHEMOS ENXERGAR</p>
+          <h1 id="home-title">ENTRE<br /><em>MUROS</em><span class="title-period">.</span></h1>
+          <p class="home-lede">Toda cidade tem histórias que prefere não contar.</p>
+          <p class="home-description">Explore sete lugares, escute diferentes vozes e registre o que encontra. Uma narrativa em primeira pessoa sobre identidade, desigualdade e a força da memória — em diálogo com <cite>Quarto de Despejo</cite>, de Carolina Maria de Jesus.</p>
+          <div class="home-actions">
+            <button type="button" id="new-game" class="btn btn-primary btn-big">COMEÇAR HISTÓRIA <span aria-hidden="true">↗</span></button>
+            <button type="button" id="continue-game" class="btn btn-subtle btn-big" hidden>CONTINUAR <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="home-facts"><span><b>07</b> CENAS</span><span><b>04</b> ATOS</span><span><b>03</b> FINAIS</span><span><b>100%</b> OFFLINE</span></div>
+        </div>
+        <div class="home-visual" aria-hidden="true">
+          <div id="cover-art"></div>
+          <span class="cover-index">CAPÍTULO 01 <span class="cover-line"></span> O COMEÇO</span>
+          <span class="cover-stamp">O MUNDO<br />É UM<br />TEXTO.</span>
+        </div>
+      </main>
+      <footer class="home-footer"><span>UMA NARRATIVA ORIGINAL PARA LER, JOGAR E REFLETIR.</span><button type="button" id="home-how" class="text-button">COMO JOGAR <span aria-hidden="true">↗</span></button></footer>
+    </section>
+
+    <section id="game-screen" class="game-screen" hidden aria-label="Jogo Entre Muros">
+      <header class="topbar">
+        <button type="button" class="brand-button" id="go-home" title="Voltar ao menu principal"><span class="brand-mark">EM<span>.</span></span><span class="brand-name">ENTRE MUROS</span></button>
+        <div class="topbar-center"><span id="act-indicator">ATO I / PERCEPÇÃO</span><span class="topbar-sep" aria-hidden="true">/</span><span id="scene-indicator">01 DE 07</span></div>
+        <div class="topbar-actions">
+          <button type="button" id="toggle-hints" class="tool-button" aria-pressed="false" title="Alternar dicas visuais" aria-label="Alternar dicas visuais">◎ <span class="tool-label">DICAS</span></button>
+          <button type="button" id="toggle-sound" class="tool-button" aria-pressed="false" title="Ligar ou desligar efeitos sonoros" aria-label="Ligar ou desligar efeitos sonoros">♪ <span class="tool-label">SOM: OFF</span></button>
+          <button type="button" id="game-help" class="tool-button" title="Como jogar">? <span class="tool-label">AJUDA</span></button>
+        </div>
+      </header>
+      <div id="progress-bar" class="chapter-progress" aria-label="Progresso do jogo"></div>
+      <main class="game-layout">
+        <div class="game-main">
+          <div class="scene-masthead"><div><div class="scene-kicker" id="scene-kicker">CENA 01 / 07</div><h2 id="scene-title">O QUARTO</h2></div><p id="scene-subtitle">Tudo começa com um olhar.</p></div>
+          <div class="scene-frame" id="scene-frame">
+            <div id="scene-art" class="scene-art" role="img" aria-label="Ilustração do cenário atual"></div>
+            <div id="hotspots" class="hotspots" aria-label="Elementos interativos da cena"></div>
+            <div class="scene-corner scene-corner-top"><span class="live-dot"></span> EXPLORAÇÃO / PRIMEIRA PESSOA</div>
+            <div class="scene-corner scene-corner-bottom">CLIQUE PARA INVESTIGAR <span aria-hidden="true">↗</span></div>
+            <section id="dialog-panel" class="dialog-panel" hidden role="dialog" aria-modal="false" aria-labelledby="dialog-heading">
+              <div class="dialog-header"><span class="dialog-index">INTERAÇÃO</span><h3 id="dialog-heading">...</h3><button type="button" id="close-dialog" class="icon-close" aria-label="Fechar diálogo">×</button></div>
+              <div id="dialog-content" class="dialog-content" aria-live="polite"></div>
+              <div id="dialog-choices" class="dialog-choices"></div>
+              <div id="dialog-foot" class="dialog-foot"><span id="dialog-hint">ESCOLHAS PODEM TER CONSEQUÊNCIAS</span><button type="button" id="dialog-done" class="btn btn-small btn-outline">FECHAR <span aria-hidden="true">↗</span></button></div>
+            </section>
+          </div>
+          <div class="below-scene"><span class="eye-mark">✳</span><span id="scene-footnote">Olhe com atenção. Nem tudo que importa está à vista.</span><span class="keyboard-hint">ESC: FECHAR · TAB: NAVEGAR</span></div>
+        </div>
+        <aside class="sidebar" aria-label="Informações da cena">
+          <div class="sidebar-section side-objective"><div class="sidebar-topline"><span>01 / OBJETIVO</span><span class="small-square">↘</span></div><h3 id="objective-title">Observe seu quarto</h3><p id="objective-description">...</p></div>
+          <div class="sidebar-section"><div class="sidebar-topline"><span>02 / INVESTIGAÇÃO</span><span id="investigation-fraction">0/2</span></div><div id="investigation-list" class="investigation-list"></div></div>
+          <div class="sidebar-section journal-teaser"><div class="sidebar-topline"><span>03 / MEMÓRIA</span><span id="journal-fraction">00 / 07</span></div><div class="journal-graphic" aria-hidden="true">“</div><h3>O Caderno de Memórias</h3><p>O que você observa também merece ser registrado.</p><button type="button" id="open-journal" class="btn btn-paper">ABRIR CADERNO <span aria-hidden="true">↗</span></button></div>
+          <div class="next-section"><p id="scene-status" class="next-hint">Investigue os elementos principais para continuar.</p><button type="button" id="next-scene" class="btn btn-primary next-button" disabled>CONTINUAR <span aria-hidden="true">→</span></button></div>
+        </aside>
+      </main>
+    </section>
+
+    <section id="ending-screen" class="ending-screen" hidden aria-labelledby="ending-title">
+      <div class="ending-bg" id="ending-art" aria-hidden="true"></div>
+      <div class="ending-content"><span class="eyebrow ending-eyebrow">A HISTÓRIA CONTINUA ALÉM DO FIM</span><div id="ending-count" class="ending-count">FINAL 01 / 03</div><h2 id="ending-title">Vozes da Mudança</h2><div class="ending-rule"></div><p id="ending-text"></p><p id="ending-epilogue" class="ending-epilogue"></p><div class="ending-actions"><button type="button" id="ending-journal" class="btn btn-outline">LER MEU CADERNO <span aria-hidden="true">↗</span></button><button type="button" id="play-again" class="btn btn-primary">JOGAR NOVAMENTE <span aria-hidden="true">↗</span></button><button type="button" id="ending-home" class="btn btn-subtle">MENU</button></div><p class="ending-note">Este jogo traz uma história fictícia e textos originais, em diálogo com a obra de Carolina Maria de Jesus.</p></div>
+    </section>
+  </div>
+
+  <div id="overlay" class="overlay" hidden></div>
+  <aside id="journal-drawer" class="journal-drawer" hidden role="dialog" aria-modal="true" aria-labelledby="journal-title" tabindex="-1">
+    <header class="drawer-header"><div><span class="eyebrow">ANOTAÇÕES / ENTRE MUROS</span><h2 id="journal-title">Caderno de Memórias<span class="title-period">.</span></h2></div><button type="button" id="close-journal" class="icon-close dark-close" aria-label="Fechar caderno">×</button></header>
+    <p class="journal-intro">Duas épocas em diálogo. Os textos sobre a obra são comentários originais, não trechos literais do livro.</p>
+    <div class="journal-layout"><nav id="journal-nav" class="journal-nav" aria-label="Registros do caderno"></nav><article id="journal-entry" class="journal-entry" aria-live="polite"></article></div>
+    <footer class="drawer-footer">QUARTO DE DESPEJO <span>·</span> CAROLINA MARIA DE JESUS, 1960</footer>
+  </aside>
+  <div id="info-modal" class="info-modal" hidden role="dialog" aria-modal="true" aria-labelledby="info-title" tabindex="-1"><div class="info-header"><span class="eyebrow">ENTRE MUROS</span><button type="button" id="close-info" class="icon-close" aria-label="Fechar janela">×</button></div><h2 id="info-title">Como jogar</h2><div id="info-content"></div></div>
+</body>
+</html>

@@ -1,0 +1,321 @@
+/* ENTRE MUROS — layout de janela fixa
+   O documento inteiro cabe na viewport. Somente conteúdos longos de diálogos,
+   caderno e janelas de ajuda podem rolar INTERNAMENTE.
+   Útil também para empacotar futuramente com Electron. */
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+.home-screen, .game-screen, .ending-screen {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* A tela do jogo ocupa a janela; a área central recebe o espaço restante. */
+.game-screen { display: flex; flex-direction: column; }
+.topbar {
+  flex: 0 0 auto;
+  height: clamp(46px, 6.5dvh, 60px);
+  padding-inline: clamp(12px, 2.1vw, 35px);
+}
+.chapter-progress {
+  flex: 0 0 5px;
+  height: 5px;
+  margin-top: 2px;
+  padding-inline: clamp(12px, 2.1vw, 35px);
+}
+.game-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  height: auto;
+  width: 100%;
+  max-width: 1800px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(205px, 20vw, 260px);
+  gap: clamp(12px, 1.6vw, 25px);
+  padding: clamp(9px, 1.6dvh, 18px) clamp(12px, 2.1vw, 32px);
+  align-items: stretch;
+  overflow: hidden;
+}
+.game-main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+.scene-masthead {
+  flex: 0 0 auto;
+  margin: 0 0 clamp(7px, 1.2dvh, 12px);
+  gap: 12px;
+}
+.scene-kicker { font-size: 9px; margin-bottom: 3px; }
+.scene-masthead h2 { font-size: clamp(27px, 4.6dvh, 45px); }
+.scene-masthead > p { font-size: clamp(11px, 1.9dvh, 15px); margin-bottom: 3px; }
+.scene-frame {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: auto;
+}
+.below-scene {
+  flex: 0 0 auto;
+  min-height: clamp(24px, 4.3dvh, 38px);
+  font-size: 10px;
+}
+.sidebar {
+  height: 100%;
+  min-height: 0;
+  padding-left: clamp(10px, 1.4vw, 18px);
+  gap: clamp(7px, 1.6dvh, 16px);
+  overflow: hidden;
+}
+.sidebar-section {
+  padding-bottom: clamp(10px, 1.8dvh, 18px);
+}
+.sidebar-topline { margin-bottom: clamp(7px, 1.4dvh, 13px); font-size: 9px; }
+.sidebar h3 { font-size: clamp(17px, 2.7dvh, 23px); margin-bottom: 5px; }
+.sidebar p { font-size: clamp(10px, 1.45dvh, 12px); line-height: 1.43; }
+.investigation-list { gap: clamp(5px, 1dvh, 10px); }
+.task { font-size: 10px; line-height: 1.3; }
+.task-icon { width: 15px; height: 15px; }
+.journal-graphic { top: 17px; font-size: 50px; }
+.journal-teaser p { margin-bottom: clamp(7px, 1.2dvh, 12px); }
+.journal-teaser .btn { padding: clamp(9px, 1.4dvh, 13px) 11px; font-size: 10px; }
+.next-section { min-height: 0; gap: 7px; }
+.next-button { padding: clamp(11px, 1.7dvh, 15px) 12px; }
+.next-hint { font-size: 10px !important; line-height: 1.3; }
+
+/* A caixa de diálogo não aumenta a altura da cena. */
+.dialog-panel {
+  max-height: calc(100% - 16px);
+  min-height: 0;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+}
+.dialog-header, .dialog-foot { flex: 0 0 auto; }
+.dialog-content, .dialog-choices { min-height: 0; }
+.dialog-choices { flex-shrink: 1; }
+
+/* Home responsiva na altura, não apenas na largura. */
+.home-header, .home-footer {
+  flex: 0 0 auto;
+  padding: clamp(10px, 2dvh, 20px) clamp(18px, 4vw, 65px);
+}
+.home-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: 1550px;
+  margin: 0 auto;
+  padding: clamp(12px, 2.1dvh, 26px) clamp(18px, 4vw, 65px);
+  gap: clamp(18px, 3.6vw, 60px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+}
+.home-copy { min-height: 0; }
+.home-copy h1 {
+  font-size: clamp(65px, min(8.1vw, 12.5dvh), 137px);
+  margin: clamp(10px, 2dvh, 24px) 0 clamp(10px, 1.8dvh, 19px);
+}
+.home-lede { font-size: clamp(18px, 2.65dvh, 26px); margin-bottom: clamp(7px, 1.25dvh, 13px); }
+.home-description { font-size: clamp(11px, 1.63dvh, 14px); line-height: 1.55; }
+.home-actions { margin: clamp(12px, 2.5dvh, 25px) 0 clamp(13px, 2.7dvh, 27px); }
+.home-actions .btn-big { min-width: 170px; padding: clamp(11px, 1.8dvh, 18px) 16px; }
+.home-facts { gap: 10px 17px; padding-top: clamp(8px, 1.8dvh, 15px); }
+.home-facts b { font-size: clamp(17px, 2.4dvh, 22px); }
+.home-visual { height: min(65dvh, 100%); min-height: 0; }
+
+/* A tela final também fica contida na janela. */
+.ending-screen { padding: clamp(10px, 2dvh, 25px) 12px; }
+.ending-content { max-height: 100%; overflow-y: auto; padding: clamp(10px, 1.7dvh, 20px) 18px; }
+.ending-eyebrow { margin-bottom: clamp(8px, 1.6dvh, 18px); }
+.ending-content h2 { font-size: clamp(39px, min(7vw, 9.5dvh), 78px); margin: clamp(7px, 1.5dvh, 16px) 0; }
+.ending-rule { margin: clamp(10px, 1.9dvh, 22px) auto; }
+.ending-content > p { font-size: clamp(14px, 2.2dvh, 18px); line-height: 1.5; }
+.ending-content > .ending-epilogue { font-size: clamp(15px, 2.3dvh, 20px); }
+.ending-actions { margin: clamp(11px, 2dvh, 23px) 0; }
+.ending-note { margin-top: clamp(8px, 1.4dvh, 17px); }
+
+/* Janelas auxiliares — rolagem própria caso o conteúdo seja longo. */
+.journal-drawer { height: 100dvh; max-height: 100dvh; overflow: hidden; }
+.drawer-header, .journal-intro, .drawer-footer { flex: 0 0 auto; }
+.journal-layout { min-height: 0; overflow: hidden; }
+.journal-nav, .journal-entry { overflow-y: auto; min-height: 0; }
+.info-modal { max-height: min(90dvh, 840px); }
+
+/* Notebook com tela baixa: condensar a barra lateral. */
+@media (min-width: 901px) and (max-height: 670px) {
+  .topbar { height: 45px; }
+  .game-layout { padding-block: 8px; }
+  .sidebar { gap: 6px; }
+  .sidebar-section { padding-bottom: 9px; }
+  .sidebar-topline { margin-bottom: 6px; }
+  .sidebar h3 { font-size: 17px; margin-bottom: 4px; }
+  .journal-teaser p { margin-bottom: 7px; }
+  .below-scene { min-height: 22px; }
+  .scene-masthead { margin-bottom: 5px; }
+  .scene-masthead h2 { font-size: 27px; }
+  .home-description { line-height: 1.45; }
+  .home-actions { margin-block: 10px; }
+  .home-facts { padding-top: 8px; }
+  .home-visual { height: min(60dvh, 100%); }
+}
+
+/* Telas estreitas: preservar a interface inteira numa coluna visual compacta. */
+@media (max-width: 900px) {
+  .game-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: clamp(6px, 1.2dvh, 10px);
+    padding: clamp(6px, 1.1dvh, 11px);
+  }
+  .game-main { width: 100%; height: 100%; min-height: 0; }
+  .scene-frame { aspect-ratio: auto; }
+  .scene-masthead h2 { font-size: clamp(22px, 3.7dvh, 33px); }
+  .below-scene { min-height: 20px; }
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    overflow: visible;
+    border: 0;
+  }
+  .sidebar-section { border: 1px solid #495957; margin: 0; padding: 8px 10px; }
+  .sidebar-topline { margin-bottom: 4px; font-size: 8px; }
+  .sidebar h3 { font-size: 16px; margin-bottom: 3px; }
+  .sidebar p { font-size: 10px; line-height: 1.25; }
+  .investigation-list { gap: 4px; }
+  .task { font-size: 10px; }
+  .journal-teaser { grid-column: 1; }
+  .journal-graphic, .journal-teaser h3, .journal-teaser p { display: none; }
+  .journal-teaser .btn { padding: 7px 9px; font-size: 9px; }
+  .next-section { grid-column: 2; justify-content: center; gap: 4px; }
+  .next-hint { font-size: 9px!important; }
+  .next-button { padding: 9px 11px; font-size: 10px; }
+  .home-main { grid-template-columns: minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); gap: 10px; }
+  .home-copy { max-width: 100%; }
+  .home-copy h1 { font-size: clamp(63px, min(13vw, 11dvh), 93px); margin: 8px 0 9px; }
+  .home-description { max-width: 700px; }
+  .home-visual { width: 100%; max-width: none; height: 100%; min-height: 0; transform: none; }
+}
+
+@media (max-width: 600px) {
+  .topbar { height: 46px; padding-inline: 8px; }
+  .brand-mark { font-size: 20px; }
+  .topbar-center { font-size: 8px; }
+  .tool-button { min-height: 29px; padding: 4px 7px; }
+  .game-layout { padding: 6px 8px; gap: 5px; }
+  .scene-masthead { margin-bottom: 5px; }
+  .scene-masthead h2 { font-size: clamp(21px, 3.8dvh, 28px); }
+  .scene-masthead > p { font-size: 10px; }
+  .scene-kicker { font-size: 8px; }
+  .scene-corner-top { top: 7px; left: 7px; }
+  .scene-corner-bottom { right: 7px; bottom: 6px; }
+  .below-scene { min-height: 20px; font-size: 9px; }
+  .hotspot { width: 38px; height: 38px; }
+  .sidebar { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 5px; }
+  .sidebar-section { padding: 6px 8px; }
+  .sidebar h3 { font-size: 14px; }
+  .sidebar p, .task { font-size: 9px; }
+  .sidebar-topline { font-size: 8px; }
+  .next-hint { display: none; }
+  .next-section { justify-content: stretch; }
+  .next-button { height: 100%; min-height: 37px; }
+  .home-header,.home-footer { padding: 9px 14px; }
+  .home-copy .eyebrow { font-size: 8px; }
+  .home-main { padding: 11px 14px; }
+  .home-copy h1 { font-size: clamp(58px, 10.5dvh, 79px); }
+  .home-lede { font-size: 18px; }
+  .home-description { font-size: 11px; line-height: 1.38; }
+  .home-actions { margin: 10px 0; gap: 6px; }
+  .home-actions .btn-big { min-width: 0; width: 100%; padding: 10px 14px; }
+  .home-facts { padding-top: 7px; gap: 7px 13px; }
+  .home-facts b { font-size: 16px; }
+  .home-facts span { font-size: 8px; }
+  .home-visual { min-height: 0; }
+  .journal-drawer { top: 0; bottom: 0; }
+  .drawer-header { padding: 14px 14px 8px; }
+  .drawer-header h2 { font-size: 23px; margin: 5px 0 0; }
+  .journal-intro { padding: 8px 14px; font-size: 11px; }
+  .journal-layout { display: flex; flex-direction: column; gap: 8px; padding: 5px 14px; }
+  .journal-nav { flex: 0 0 auto; flex-direction: row; overflow-x: auto; overflow-y: hidden; }
+  .journal-nav button { min-width: 114px; padding: 7px; }
+  .journal-entry { flex: 1 1 auto; overflow-y: auto; }
+  .journal-entry h3 { font-size: 22px; margin-bottom: 7px; }
+  .entry-section { padding: 8px 0; }
+  .entry-section p { font-size: 12px; line-height: 1.45; }
+  .drawer-footer { padding: 9px 14px; }
+  .ending-content h2 { font-size: clamp(36px, 6dvh, 57px); }
+  .ending-content > p { font-size: 14px; }
+  .ending-actions { margin: 8px 0; gap: 6px; }
+  .ending-actions .btn { padding: 9px 12px; }
+}
+
+/* Se a janela for excepcionalmente baixa, o que for auxiliar fica compacto;
+   os controles essenciais continuam no viewport. */
+@media (max-height: 570px) {
+  .home-visual { display: none; }
+  .home-main { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+  .home-copy h1 { font-size: clamp(50px, 11dvh, 70px); }
+  .home-header, .home-footer { padding-block: 8px; }
+  .home-copy .eyebrow { display: none; }
+  .home-lede { margin-bottom: 5px; }
+  .home-description { font-size: 10px; line-height: 1.3; }
+  .home-actions { margin-block: 7px; }
+  .game-layout { padding-block: 5px; }
+  .scene-masthead > p { display: none; }
+  .scene-kicker { display: none; }
+  .below-scene { min-height: 16px; }
+  .sidebar p { line-height: 1.15; }
+  .journal-teaser p { display: none; }
+}
+
+/* A arte mantém sempre a mesma proporção (1000 × 560), fundamental para
+   que hotspots e futuras imagens desenhadas se mantenham alinhados. */
+.game-main { justify-content: center; }
+.scene-frame {
+  align-self: center;
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1000 / 560;
+  height: auto;
+}
+@media(max-width: 900px) {
+  .game-main { justify-content: center; }
+  .scene-frame { flex: 0 0 auto; aspect-ratio: 1000 / 560; }
+}
+
+/* Em telas estreitas, o diálogo flutua na janela, em vez de ficar confinado
+   ao cenário (que permanece 16:9). As escolhas não ficam esmagadas. */
+@media (max-width: 900px) {
+  .game-main:has(.dialog-panel:not([hidden])) { position: relative; z-index: 10; }
+  .scene-frame:has(.dialog-panel:not([hidden])) { overflow: visible; }
+  .dialog-panel {
+    position: fixed;
+    left: 50%;
+    right: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: min(620px, calc(100vw - 20px));
+    max-height: min(86dvh, 540px);
+    box-shadow: 0 0 0 100vmax #06141bbd, 0 16px 50px #020b10c9;
+  }
+  .dialog-content { flex: 0 1 auto; }
+  .dialog-choices { flex: 0 1 auto; }
+}
+.ending-bg svg { display: block; }
